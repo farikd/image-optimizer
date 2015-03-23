@@ -84,7 +84,7 @@ class OptimizerFactory
         ));
 
         $this->optimizers['jpegoptim'] = $this->wrap(new CommandOptimizer(
-            new Command($this->executable('jpegoptim'), array('--strip-all', '--all-progressiv'))
+            new Command($this->executable('jpegoptim'), array('--strip-all', '--all-progressiv', '--max=80'))
         ));
         $this->optimizers['jpegtran'] = $this->wrap(new CommandOptimizer(
             new Command($this->executable('jpegtran'), array('-optimize', '-progressive')),
@@ -93,7 +93,7 @@ class OptimizerFactory
             }
         ));
         $this->optimizers['jpeg'] = $this->optimizers['jpg'] = new ChainOptimizer(array(
-            $this->unwrap($this->optimizers['jpegtran']),
+            //$this->unwrap($this->optimizers['jpegtran']),
             $this->unwrap($this->optimizers['jpegoptim']),
         ), true);
 
